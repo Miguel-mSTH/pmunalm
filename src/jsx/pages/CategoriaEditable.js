@@ -16,6 +16,9 @@ const CategoriaEditable = ({
             name="nombre"
             value={editFormData.nombreCategoria}
             onChange={handleEditFormChange}
+            // onChange={(e) =>
+            //   setCategoria((state) => ({ ...state, nombre: e.target.value }))
+            // }
           />
         </td>
         <td>

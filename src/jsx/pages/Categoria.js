@@ -16,10 +16,10 @@ const Categoria = () => {
     descripcionCategoria: "",
   });
   //Add data
-  const [addFormData, setAddFormData] = useState({
-    nombreCategoria: "",
-    descripcionCategoria: "",
-  });
+  // const [addFormData, setAddFormData] = useState({
+  //   nombreCategoria: "",
+  //   descripcionCategoria: "",
+  // });
   // edit  data
   const [editFormData, setEditFormData] = useState({
     nombreCategoria: "",
@@ -39,6 +39,7 @@ const Categoria = () => {
       .post("https://unalmpm.herokuapp.com/categorias", categoria)
       .then((response) => {
         swal("Good job!", "Successfully Added", "success");
+        getCategoria();
       })
       .catch(() => {
         swal("Oops", "Failed", "error");
@@ -46,72 +47,102 @@ const Categoria = () => {
   }
 
   useEffect(() => {
-    //e.preventDefault();
     getCategoria();
   }, []);
 
+  //save modal
   function handleSubmit(e) {
     e.preventDefault();
     saveCategoria(form);
+
     setForm({
-      nombreCategoria: form.nombreCategoria,
-      descripcionCategoria: form.descripcionCategoria,
+      nombreCategoria: "",
+      descripcionCategoria: "",
     });
     setAddCard(false);
-    form.nombreCategoria = form.descripcionCategoria = "";
   }
 
+  //delete categoria
+  function deleteCategoria(id) {
+    axios
+      .delete(`https://unalmpm.herokuapp.com/categorias/${id}`)
+      .then((response) => {
+        swal("Good job!", "Successfully Added", "success");
+        getCategoria();
+      })
+      .catch(() => {
+        alert("Por favor intentalo snuevamente");
+      });
+  }
+
+  function updateCategoria(id, categoria) {
+    axios
+      .put(`http://localhost:4000/proveedor/${id}`, categoria)
+      .then((response) => {
+        alert("El proveedor se actualizo correctamente");
+        //history.goBack();
+      })
+      .catch(() => {
+        alert("Por favor intentalo nuevamente");
+      });
+  }
+
+  // function handleEditFormSubmit(id,event) {
+  //   event.preventDefault();
+  //   updateCategoria(id);
+  // }
+
   // delete data
-  const handleDeleteClick = (contentId) => {
-    const newCategorias = [...categorias];
-    const index = categorias.findIndex(
-      (categoria) => categoria.id === contentId
-    );
-    newCategorias.splice(index, 1);
-    setCategoria(newCategorias);
-  };
+  // const handleDeleteClick = (contentId) => {
+  //   const newCategorias = [...categorias];
+  //   const index = categorias.findIndex(
+  //     (categoria) => categoria.id === contentId
+  //   );
+  //   newCategorias.splice(index, 1);
+  //   setCategoria(newCategorias);
+  // };
 
   //Modal box
   const [addCard, setAddCard] = useState(false);
 
   // Add contact function
-  const handleAddFormChange = (event) => {
-    event.preventDefault();
-    const fieldName = event.target.getAttribute("nombre");
-    const fieldValue = event.target.value;
-    const newFormData = { ...addFormData };
-    newFormData[fieldName] = fieldValue;
-    setAddFormData(newFormData);
-  };
+  // const handleAddFormChange = (event) => {
+  //   event.preventDefault();
+  //   const fieldName = event.target.getAttribute("nombre");
+  //   const fieldValue = event.target.value;
+  //   const newFormData = { ...addFormData };
+  //   newFormData[fieldName] = fieldValue;
+  //   setAddFormData(newFormData);
+  // };
 
-  //Add Submit data
-  const handleAddFormSubmit = (event) => {
-    event.preventDefault();
-    var error = false;
-    var errorMsg = "";
-    if (addFormData.nombreCategoria === "") {
-      error = true;
-      errorMsg = "Please fill  name";
-    } else if (addFormData.descripcionCategoria === "") {
-      error = true;
-      errorMsg = "Please fill department.";
-    }
-    if (!error) {
-      const newContent = {
-        id: nanoid(),
-        nombreCategoria: addFormData.nombreCategoria,
-        descripcionCategoria: addFormData.descripcionCategoria,
-      };
+  // //Add Submit data
+  // const handleAddFormSubmit = (event) => {
+  //   event.preventDefault();
+  //   var error = false;
+  //   var errorMsg = "";
+  //   if (addFormData.nombreCategoria === "") {
+  //     error = true;
+  //     errorMsg = "Please fill  name";
+  //   } else if (addFormData.descripcionCategoria === "") {
+  //     error = true;
+  //     errorMsg = "Please fill department.";
+  //   }
+  //   if (!error) {
+  //     const newContent = {
+  //       id: nanoid(),
+  //       nombreCategoria: addFormData.nombreCategoria,
+  //       descripcionCategoria: addFormData.descripcionCategoria,
+  //     };
 
-      const newCategorias = [...categorias, newContent];
-      setCategoria(newCategorias);
-      setAddCard(false);
-      swal("Good job!", "Successfully Added", "success");
-      addFormData.nombre = addFormData.descripcion = "";
-    } else {
-      swal("Oops", errorMsg, "error");
-    }
-  };
+  //     const newCategorias = [...categorias, newContent];
+  //     setCategoria(newCategorias);
+  //     setAddCard(false);
+  //     swal("Good job!", "Successfully Added", "success");
+  //     addFormData.nombre = addFormData.descripcion = "";
+  //   } else {
+  //     swal("Oops", errorMsg, "error");
+  //   }
+  // };
 
   //Edit start
   //const [editModal, setEditModal] = useState(false);
@@ -126,18 +157,22 @@ const Categoria = () => {
       nombreCategoria: categoria.nombreCategoria,
       descripcionCategoria: categoria.descripcionCategoria,
     };
-    setForm(formValues);
+    //setForm(formValues);
+    setEditFormData(formValues);
     //setEditModal(true);
   };
 
   //update data function
   const handleEditFormChange = (event) => {
     event.preventDefault();
-    const fieldName = event.target.getAttribute("nombre");
+    const fieldName = event.target.getAttribute("name");
+    //console.log(fieldName);
     const fieldValue = event.target.value;
-    const newFormData = { ...form };
+    //console.log(fieldValue);
+    const newFormData = { ...editFormData };
     newFormData[fieldName] = fieldValue;
-    setForm(newFormData);
+    //setForm(newFormData);
+    setEditFormData(newFormData);
   };
 
   // edit form data submit
@@ -145,8 +180,8 @@ const Categoria = () => {
     event.preventDefault();
     const editedContent = {
       id: editContentId,
-      nombreCategoria: form.nombreCategoria,
-      descripcionCategoria: form.descripcionCategoria,
+      nombreCategoria: editFormData.nombreCategoria,
+      descripcionCategoria: editFormData.descripcionCategoria,
     };
     const newCategorias = [...categorias];
     const index = categorias.findIndex(
@@ -196,7 +231,7 @@ const Categoria = () => {
                             type="text"
                             className="form-control"
                             autocomplete="off"
-                            name="name"
+                            name="nombre"
                             required="required"
                             value={form.nombreCategoria}
                             onChange={(e) =>
@@ -306,8 +341,11 @@ const Categoria = () => {
                                   </Link>
                                   <Link
                                     className="btn btn-danger shadow btn-xs sharp"
+                                    // onClick={() =>
+                                    //   handleDeleteClick(categoria.id)
+                                    // }
                                     onClick={() =>
-                                      handleDeleteClick(categoria.id)
+                                      deleteCategoria(categoria.id)
                                     }
                                   >
                                     <i className="fa fa-trash"></i>
