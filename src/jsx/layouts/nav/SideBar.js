@@ -668,7 +668,7 @@ const SideBar = () => {
           </li>
           <li className={`${categoria.includes(path) ? "mm-active" : ""}`}>
             <Link className="has-arrow ai-icon" to="#">
-              <i className="flaticon-008-check"></i>
+              <i className="flaticon-085-signal"></i>
               <span className="nav-text">Categoria</span>
             </Link>
             <ul>
@@ -690,7 +690,7 @@ const SideBar = () => {
               </li>
             </ul>
           </li>
-          <li className={`${categoria.includes(path) ? "mm-active" : ""}`}>
+          <li className={`${producto.includes(path) ? "mm-active" : ""}`}>
             <Link className="has-arrow ai-icon" to="#">
               <i className="flaticon-008-check"></i>
               <span className="nav-text">Producto</span>
