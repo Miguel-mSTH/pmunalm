@@ -1,12 +1,96 @@
-import React, { Fragment } from "react";
-import { Form } from "react-bootstrap";
+import React, { Fragment, useEffect, useState } from "react";
+
+import { Form, Modal } from "react-bootstrap";
 import PageTitle from "../layouts/PageTitle";
-import { Dropdown } from "react-bootstrap";
+import { Button, Dropdown } from "react-bootstrap";
 
 const Producto = () => {
+  const [productos, setProducto] = useState();
+  const [addCard, setAddCard] = useState(false);
+  const [form, setForm] = useState({
+    nombreCategoria: "",
+    descripcionCategoria: "",
+  });
+  function handleSubmit(e) {
+    e.preventDefault();
+    // saveCategoria(form);
+
+    // setForm({
+    //   nombreCategoria: "",
+    //   descripcionCategoria: "",
+    // });
+    // setAddCard(false);
+  }
   return (
     <Fragment>
       <PageTitle activeMenu="Registrar" motherMenu="Shop" />
+      <Modal className="modal fade" show={addCard} onHide={setAddCard}>
+        <div className="" role="document">
+          <div className="">
+            <form onSubmit={handleSubmit}>
+              <div className="modal-header">
+                <h4 className="modal-title fs-20">Ingresar Inventario</h4>
+                <button
+                  type="button"
+                  className="btn-close"
+                  onClick={() => setAddCard(false)}
+                  //onClick={handleClick}
+                  data-dismiss="modal"
+                >
+                  <span></span>
+                </button>
+              </div>
+              <div className="modal-body">
+                <i
+                  className="flaticon-cancel-12 close"
+                  data-dismiss="modal"
+                ></i>
+                <div className="add-contact-box">
+                  <div className="add-contact-content">
+                    {/* add loop for cantidad */}
+                    <div className="form-group mb-3">
+                      <div className="contact-name">
+                        <input
+                          type="text"
+                          className="form-control"
+                          autocomplete="off"
+                          name="numero"
+                          required="required"
+                          onChange={(e) =>
+                            setForm((state) => ({
+                              ...state,
+                              nombreCategoria: e.target.value,
+                            }))
+                          }
+                          placeholder="numero inventario"
+                        />
+                        <span className="validation-text"></span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div className="modal-footer">
+                <button
+                  type="submit"
+                  className="btn btn-primary"
+                  //onClick={handleAddFormSubmit}
+                >
+                  Add
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setAddCard(false)}
+                  className="btn btn-danger"
+                >
+                  {" "}
+                  <i className="flaticon-delete-1"></i> Discard
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </Modal>
 
       <div className="row">
         <div className="col-xl-12">
@@ -98,17 +182,31 @@ const Producto = () => {
                       </div>
                     </div>
 
-                    <div className="mb-3">
-                      <label htmlFor="address">Cantidad</label>
-                      <input
-                        type="text"
-                        className="form-control"
-                        id="address"
-                        placeholder="Marca"
-                        required=""
-                      />
-                      <div className="invalid-feedback">
-                        Please enter your shipping address.
+                    <div className="row">
+                      <div className="col-md-6 mb-3">
+                        <label htmlFor="address">Cantidad</label>
+                        <input
+                          type="text"
+                          className="form-control"
+                          id="address"
+                          placeholder="Cantidad"
+                          required=""
+                        />
+                        <div className="invalid-feedback">
+                          Please enter your shipping address.
+                        </div>
+                      </div>
+                      <div className="col-md-6 mb-3 d-flex align-items-center">
+                        <Button
+                          className="me-2 btn btn-default"
+                          variant="secondary btn-rounded"
+                          onClick={() => setAddCard(true)}
+                        >
+                          <span className="btn-icon-start text-secondary">
+                            <i className="fa fa-plus color-info" />
+                          </span>
+                          Add
+                        </Button>
                       </div>
                     </div>
 
