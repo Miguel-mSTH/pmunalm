@@ -1,6 +1,6 @@
 import React from "react";
 
-const CategoriaEditable = ({
+const ProductoEditable = ({
   editFormData,
   handleEditFormChange,
   handleCancelClick,
@@ -52,4 +52,4 @@ const CategoriaEditable = ({
     </>
   );
 };
-export default CategoriaEditable;
+export default ProductoEditable;

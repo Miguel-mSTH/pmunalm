@@ -1,8 +1,9 @@
 import React, { Fragment } from "react";
 import { Form } from "react-bootstrap";
-import PageTitle from "../../../../layouts/PageTitle";
+import PageTitle from "../layouts/PageTitle";
+import { Dropdown } from "react-bootstrap";
 
-const Checkout = () => {
+const Producto = () => {
   return (
     <Fragment>
       <PageTitle activeMenu="Registrar" motherMenu="Shop" />
@@ -124,10 +125,23 @@ const Checkout = () => {
                     <div className="row">
                       <div className="col-md-6 mb-3">
                         <label htmlFor="state">Categoria</label>
-                        <Form.Control as="select">
+                        {/* <Form.Control as="select">
                           <option style={{ color: "blue" }}>Choose...</option>
                           <option>United States</option>
-                        </Form.Control>
+                        </Form.Control> */}
+                        <Dropdown>
+                          <Dropdown.Toggle variant="white">
+                            Dropdown button
+                          </Dropdown.Toggle>
+                          <Dropdown.Menu>
+                            <h5 className="dropdown-header">Dropdown header</h5>
+                            <Dropdown.Item href="#">Link 1</Dropdown.Item>
+                            <Dropdown.Item href="#">Link 2</Dropdown.Item>
+                            <Dropdown.Item href="#">Link 3</Dropdown.Item>
+                            <h5 className="dropdown-header">Dropdown header</h5>
+                            <Dropdown.Item href="#">Another link</Dropdown.Item>
+                          </Dropdown.Menu>
+                        </Dropdown>
 
                         <div className="invalid-feedback">
                           Please provide a valid state.
@@ -163,4 +177,4 @@ const Checkout = () => {
   );
 };
 
-export default Checkout;
+export default Producto;

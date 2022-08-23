@@ -81,6 +81,8 @@ import WizardForm from "./components/Forms/ReduxWizard/Index";
 import Categoria from "./pages/Categoria";
 import CategoriaForm from "./components/Forms/ReduxForm/CategoriaForm";
 
+import Producto from "./pages/Producto";
+
 /// Widget
 import Widget from "./pages/Widget";
 
@@ -176,6 +178,9 @@ const Markup = () => {
     /// Categoria
     { url: "categoria", component: Categoria },
     { url: "categoria-form", component: CategoriaForm },
+
+    ///Producto
+    { url: "producto", component: Producto },
 
     /// Widget
     { url: "widget-basic", component: Widget },

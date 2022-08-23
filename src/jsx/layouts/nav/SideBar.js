@@ -128,6 +128,7 @@ const SideBar = () => {
     ],
     redux = ["redux-form", "redux-wizard", "todo"],
     categoria = ["categoria-form", "categoria"],
+    producto = ["producto"],
     widget = ["widget-basic"],
     forms = [
       "form-element",
@@ -685,6 +686,22 @@ const SideBar = () => {
                   to="/categoria-form"
                 >
                   Categoria Form
+                </Link>
+              </li>
+            </ul>
+          </li>
+          <li className={`${categoria.includes(path) ? "mm-active" : ""}`}>
+            <Link className="has-arrow ai-icon" to="#">
+              <i className="flaticon-008-check"></i>
+              <span className="nav-text">Producto</span>
+            </Link>
+            <ul>
+              <li>
+                <Link
+                  className={`${path === "producto" ? "mm-active" : ""}`}
+                  to="/producto"
+                >
+                  Registrar Producto
                 </Link>
               </li>
             </ul>
