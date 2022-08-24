@@ -128,7 +128,8 @@ const SideBar = () => {
     ],
     redux = ["redux-form", "redux-wizard", "todo"],
     categoria = ["categoria-form", "categoria"],
-    producto = ["producto"],
+    presentacion = ["presentacion"],
+    producto = ["producto", "producto-listar"],
     widget = ["widget-basic"],
     forms = [
       "form-element",
@@ -690,6 +691,22 @@ const SideBar = () => {
               </li>
             </ul>
           </li>
+          <li className={`${presentacion.includes(path) ? "mm-active" : ""}`}>
+            <Link className="has-arrow ai-icon" to="#">
+              <i className="flaticon-053-lifebuoy"></i>
+              <span className="nav-text">Presentacion</span>
+            </Link>
+            <ul>
+              <li>
+                <Link
+                  className={`${path === "presentacion" ? "mm-active" : ""}`}
+                  to="/presentacion"
+                >
+                  Presentacion
+                </Link>
+              </li>
+            </ul>
+          </li>
           <li className={`${producto.includes(path) ? "mm-active" : ""}`}>
             <Link className="has-arrow ai-icon" to="#">
               <i className="flaticon-008-check"></i>
@@ -702,6 +719,14 @@ const SideBar = () => {
                   to="/producto"
                 >
                   Registrar Producto
+                </Link>
+              </li>
+              <li>
+                <Link
+                  className={`${path === "ProductoListar" ? "mm-active" : ""}`}
+                  to="/producto-listar"
+                >
+                  Listar Producto
                 </Link>
               </li>
             </ul>

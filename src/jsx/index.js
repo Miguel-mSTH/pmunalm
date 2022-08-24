@@ -78,10 +78,16 @@ import Todo from "./pages/Todo";
 import ReduxForm from "./components/Forms/ReduxForm/ReduxForm";
 import WizardForm from "./components/Forms/ReduxWizard/Index";
 
+//Categoria
 import Categoria from "./pages/Categoria";
 import CategoriaForm from "./components/Forms/ReduxForm/CategoriaForm";
 
+//Producto
 import Producto from "./pages/Producto";
+import ProductoListar from "./pages/ProductoListar";
+
+//Presentacion
+import Presentacion from "./pages/Presentacion";
 
 /// Widget
 import Widget from "./pages/Widget";
@@ -181,6 +187,10 @@ const Markup = () => {
 
     ///Producto
     { url: "producto", component: Producto },
+    { url: "producto-listar", component: ProductoListar },
+
+    ///Presentacion
+    { url: "presentacion", component: Presentacion },
 
     /// Widget
     { url: "widget-basic", component: Widget },
